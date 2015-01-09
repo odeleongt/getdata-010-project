@@ -20,10 +20,14 @@ if(!file.exists("UCI HAR Dataset.zip")){
 # Unzip the data files
 unzip(zipfile = "UCI HAR Dataset.zip", junkpaths = TRUE)
 
-# Read the training set and labels
+# Read the training set, subjects and labels
 train <- read.table(file = "UCI HAR Dataset/train/X_train.txt", sep = "")
 train_labels <- read.table(file = "UCI HAR Dataset/train/y_train.txt", sep = "")
+train_subjects <- read.table(file = "UCI HAR Dataset/train/subject_train.txt",
+														 sep = "")
 
-# Read the test set and labels
+# Read the test set and, subjects labels
 test <- read.table(file = "UCI HAR Dataset/test/X_test.txt", sep = "")
 test_labels <- read.table(file = "UCI HAR Dataset/test/y_test.txt", sep = "")
+test_subjects <- read.table(file = "UCI HAR Dataset/test/subject_test.txt",
+														sep = "")
