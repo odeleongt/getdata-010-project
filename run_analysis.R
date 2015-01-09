@@ -140,7 +140,8 @@ library(package = dplyr)
 
 summary_data <- tidy_data %>% 
 	group_by(set, subject_id, activity) %>%
-	summarise_each(funs = "mean")
+	summarise_each(funs = "mean") %>%
+	as.data.frame
 
 
 #*-----------------------------------------------------------------------------*
