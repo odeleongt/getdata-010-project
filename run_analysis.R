@@ -31,3 +31,10 @@ test <- read.table(file = "UCI HAR Dataset/test/X_test.txt", sep = "")
 test_labels <- read.table(file = "UCI HAR Dataset/test/y_test.txt", sep = "")
 test_subjects <- read.table(file = "UCI HAR Dataset/test/subject_test.txt",
 														sep = "")
+
+# Read the feature labels (dataset header or column names)
+header <- read.table(file = "UCI HAR Dataset/features.txt")
+names(header) <- c("row", "feature")
+
+# Fix the feature names so they are valid names in R
+header$name <- make.names(names = header$feature, unique = TRUE)
