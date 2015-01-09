@@ -81,16 +81,20 @@ test <- test[, grepl(pattern = "(mean[.])|(std)", x = names(test))]
 # Bind the training and testing datasets and their labels
 #*-----------------------------------------------------------------------------*
 
-# Label the activities
-train_labels <- merge(x = train_labels, y = activities)
-test_labels <- merge(x = test_labels, y = activities)
-
 # Bind labels to datasets (and label each dataset)
-train <- cbind(set = "train", train_subjects, activity = train_labels$activity,
-							 train, stringsAsFactors = FALSE)
-test <- cbind(set = "test", test_subjects, activity = test_labels$activity,
-							test, stringsAsFactors = FALSE)
+train <- cbind(row = seq(1, nrow(train)), set = "train", train_subjects,
+							 train_labels, train, stringsAsFactors = FALSE)
+test <- cbind(row = seq(1, nrow(test)), set = "test", test_subjects,
+							test_labels, test, stringsAsFactors = FALSE)
+
+# Label the activities
+train <- merge(x = activities, y = train)
+test <- merge(x = activities, y = test)
 
 # Bind the datasets
-tidy_data <- rbind(train, test, stringsAsFactors = FALSE)
+tidy_data <- rbind(train, test)
+
+# Recover ordering and drop unused variables
+tidy_data <- tidy_data[order(tidy_data$set, -tidy_data$row, decreasing = TRUE),
+											 -c(1, 3)]
 row.names(tidy_data) <- seq(1, nrow(tidy_data))
