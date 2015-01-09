@@ -21,26 +21,32 @@ if(!file.exists("UCI HAR Dataset.zip")){
 unzip(zipfile = "UCI HAR Dataset.zip")
 
 # Read the training set, subjects and labels
-train <- read.table(file = "UCI HAR Dataset/train/X_train.txt", sep = "")
-train_labels <- read.table(file = "UCI HAR Dataset/train/y_train.txt", sep = "")
+train <- read.table(file = "UCI HAR Dataset/train/X_train.txt", sep = "",
+										stringsAsFactors = FALSE)
+train_labels <- read.table(file = "UCI HAR Dataset/train/y_train.txt", sep = "",
+													 stringsAsFactors = FALSE)
 train_subjects <- read.table(file = "UCI HAR Dataset/train/subject_train.txt",
-														 sep = "")
+														 sep = "", stringsAsFactors = FALSE)
 
 # Read the test set and, subjects labels
-test <- read.table(file = "UCI HAR Dataset/test/X_test.txt", sep = "")
-test_labels <- read.table(file = "UCI HAR Dataset/test/y_test.txt", sep = "")
+test <- read.table(file = "UCI HAR Dataset/test/X_test.txt", sep = "",
+									 stringsAsFactors = FALSE)
+test_labels <- read.table(file = "UCI HAR Dataset/test/y_test.txt", sep = "",
+													stringsAsFactors = FALSE)
 test_subjects <- read.table(file = "UCI HAR Dataset/test/subject_test.txt",
-														sep = "")
+														sep = "", stringsAsFactors = FALSE)
 
 # Read the feature labels (dataset header or column names)
-header <- read.table(file = "UCI HAR Dataset/features.txt")
+header <- read.table(file = "UCI HAR Dataset/features.txt",
+										 stringsAsFactors = FALSE)
 names(header) <- c("row", "feature")
 
 # Fix the feature names so they are valid names in R
 header$name <- make.names(names = header$feature, unique = TRUE)
 
 # Read the activity labels
-activities <- read.table(file = "UCI HAR Dataset/activity_labels.txt", sep = "")
+activities <- read.table(file = "UCI HAR Dataset/activity_labels.txt", sep = "",
+												 stringsAsFactors = FALSE)
 
 
 #*-----------------------------------------------------------------------------*
