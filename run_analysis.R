@@ -60,3 +60,12 @@ names(activities) <- c("class", "activity")
 names(train) <- header$name
 names(test) <- header$name
 
+
+#*-----------------------------------------------------------------------------*
+# Keep only features of interest
+#*-----------------------------------------------------------------------------*
+
+# Keep only "mean" and "std" columns
+train <- train[, grepl(pattern = "(mean[.])|(std)", x = names(train))]
+
+test <- test[, grepl(pattern = "(mean[.])|(std)", x = names(test))]
