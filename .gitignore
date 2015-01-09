@@ -3,3 +3,6 @@
 
 # Ignore extracted dataset
 UCI HAR Dataset
+
+# Ignore html files
+*.htm*
