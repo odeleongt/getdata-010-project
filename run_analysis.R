@@ -141,3 +141,10 @@ library(package = dplyr)
 summary_data <- tidy_data %>% 
 	group_by(set, subject_id, activity) %>%
 	summarise_each(funs = "mean")
+
+
+#*-----------------------------------------------------------------------------*
+# Export the tidy dataset
+#*-----------------------------------------------------------------------------*
+
+write.table(x = summary_data, file = "summary_data.txt", row.names = FALSE)
