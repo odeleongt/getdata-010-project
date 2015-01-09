@@ -38,3 +38,7 @@ names(header) <- c("row", "feature")
 
 # Fix the feature names so they are valid names in R
 header$name <- make.names(names = header$feature, unique = TRUE)
+
+# Read the activity labels
+activities <- read.table(file = "UCI HAR Dataset/activity_labels.txt", sep = "")
+
