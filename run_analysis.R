@@ -129,3 +129,15 @@ tidy_names <- gsub("f_", "frequency_", tidy_names)
 
 # Rename the tidy dataset
 names(tidy_data) <- tidy_names
+
+
+#*-----------------------------------------------------------------------------*
+# Prepare the summary dataset
+#*-----------------------------------------------------------------------------*
+
+# Use dplyr
+library(package = dplyr)
+
+summary_data <- tidy_data %>% 
+	group_by(set, subject_id, activity) %>%
+	summarise_each(funs = "mean")
