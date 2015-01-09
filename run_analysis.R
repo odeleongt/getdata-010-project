@@ -42,3 +42,21 @@ header$name <- make.names(names = header$feature, unique = TRUE)
 # Read the activity labels
 activities <- read.table(file = "UCI HAR Dataset/activity_labels.txt", sep = "")
 
+
+#*-----------------------------------------------------------------------------*
+# Label the features with column names and subject/activity
+#*-----------------------------------------------------------------------------*
+
+# Fix column names on the labels and subjects
+names(train_labels) <- "class"
+names(train_subjects) <- "subject_id"
+names(test_labels) <- "class"
+names(test_subjects) <- "subject_id"
+
+# Fix column names on the activity labels
+names(activities) <- c("class", "activity")
+
+# Add column names to the feature datasets
+names(train) <- header$name
+names(test) <- header$name
+
