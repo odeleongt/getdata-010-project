@@ -98,3 +98,34 @@ tidy_data <- rbind(train, test)
 tidy_data <- tidy_data[order(tidy_data$set, -tidy_data$row, decreasing = TRUE),
 											 -c(1, 3)]
 row.names(tidy_data) <- seq(1, nrow(tidy_data))
+
+
+#*-----------------------------------------------------------------------------*
+# Fix variable names
+#*-----------------------------------------------------------------------------*
+
+# Use only the names
+tidy_names <- names(tidy_data)
+
+# Remove dots (placeholders for invalid characters)
+tidy_names <- gsub(pattern = "[.]+", replacement = "_", x = tidy_names)
+
+# Remove trailing underscores
+tidy_names <- sub(pattern = "[^[:alpha:]]*$", replacement = "", x = tidy_names)
+
+# Separate words (starting in uppercase letters)
+tidy_names <- gsub(pattern = "([A-W])", replacement = "_\\1", x = tidy_names)
+
+# Use all lowercase names
+tidy_names <- tolower(tidy_names)
+
+# Expand some abbreviations
+tidy_names <- gsub("^t_", "time_", tidy_names)
+tidy_names <- gsub("acc_", "accelerometer_", tidy_names)
+tidy_names <- gsub("_std", "_stdev", tidy_names)
+tidy_names <- gsub("gyro_", "gyroscope_", tidy_names)
+tidy_names <- gsub("mag_", "magnetometer_", tidy_names)
+tidy_names <- gsub("f_", "frequency_", tidy_names)
+
+# Rename the tidy dataset
+names(tidy_data) <- tidy_names
