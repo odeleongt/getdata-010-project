@@ -75,3 +75,22 @@ names(test) <- header$name
 train <- train[, grepl(pattern = "(mean[.])|(std)", x = names(train))]
 
 test <- test[, grepl(pattern = "(mean[.])|(std)", x = names(test))]
+
+
+#*-----------------------------------------------------------------------------*
+# Bind the training and testing datasets and their labels
+#*-----------------------------------------------------------------------------*
+
+# Label the activities
+train_labels <- merge(x = train_labels, y = activities)
+test_labels <- merge(x = test_labels, y = activities)
+
+# Bind labels to datasets (and label each dataset)
+train <- cbind(set = "train", train_subjects, activity = train_labels$activity,
+							 train, stringsAsFactors = FALSE)
+test <- cbind(set = "test", test_subjects, activity = test_labels$activity,
+							test, stringsAsFactors = FALSE)
+
+# Bind the datasets
+tidy_data <- rbind(train, test, stringsAsFactors = FALSE)
+row.names(tidy_data) <- seq(1, nrow(tidy_data))
